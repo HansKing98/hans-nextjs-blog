@@ -5,6 +5,28 @@ tags:
   [git]
 ---
 
+完整清理示例
+
+结合你之前的清理需求，如果你想清理缓存、本地分支和所有贮藏，可以这样操作：
+
+```bash
+# 清理工作目录和未跟踪文件
+git reset --hard
+git clean -fd
+
+# 清理远程引用和无用对象
+git fetch --prune
+git gc --prune=now
+
+# 删除所有本地分支（除了当前分支）
+git branch | grep -v "$(git rev-parse --abbrev-ref HEAD)" | xargs git branch -D
+
+# 清除所有贮藏
+git stash clear
+```
+
+————————————————
+
 我来帮你说明如何在 macOS 上使用 Git 清理本地缓存以及删除所有本地分支的步骤。以下是具体操作：
 
 1. 清理本地缓存
@@ -83,3 +105,15 @@ git branch | grep -v "$(git rev-parse --abbrev-ref HEAD)" | xargs git branch -D
 1. 备份：如果不确定，建议先备份仓库（复制整个文件夹）。
 2. 远程分支：以上操作只影响本地，不会删除远程分支。
 3. 当前分支：上述命令不会删除你当前所在的分支。
+
+清除所有贮藏的命令
+
+bash
+
+```bash
+git stash clear
+```
+
+解释
+
+- git stash clear：删除当前仓库中的所有贮藏条目。这个操作是不可逆的，执行后所有贮藏都会被永久删除。

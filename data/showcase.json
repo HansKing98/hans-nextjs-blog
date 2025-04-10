@@ -1,0 +1,21 @@
+{
+  "projects": [
+    {
+      "title": "NextChat",
+      "description": "一个基于 Next.js 的聊天应用。",
+      "href": "https://nextchat.hansking.cn"
+    },
+    {
+      "title": "Gallery",
+      "description": "我的个人图库。",
+      "href": "https://gallery.hansking.cn"
+    }
+  ],
+  "tools": [
+    {
+      "title": "PromptUp",
+      "description": "这网站不错，把最近一些不错的提示词都收集起来了。比如 convert photo to ghibli style。",
+      "href": "https://promptup.net/"
+    }
+  ]
+} 

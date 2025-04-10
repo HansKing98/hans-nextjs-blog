@@ -56,21 +56,11 @@ export default function About() {
               </i>
             </a>
             <br />I started it with my previous{' '}
-            <a href="https://github.com/hansking98/hans-blog-gatsby">Gatsby version</a> and{' '}
-            <a href="https://github.com/timlrx/tailwind-nextjs-starter-blog">
+            <a href="https://github.com/hansking98/tailwind-nextjs-starter-blog">
               Tailwind Nextjs Starter Blog
             </a>
             .
             <br />
-            If you are finding inspiration, you can see my these 2 posts about this site.
-            <ul>
-              <li>
-                <Link href="posts/202301/front-end-learning-and-gatsby">About Gatsby</Link>
-              </li>
-              <li>
-                <Link href="posts/202301/moving-to-nextjs">About NextJS</Link>
-              </li>
-            </ul>
           </div>
         </div>
 

@@ -66,3 +66,15 @@ export default class LifecycleDemo extends React.Component<Props, State> {
   }
 }
 ```
+2. 使用示例
+
+tsx
+
+```tsx
+// src/index.tsx
+import ReactDOM from 'react-dom/client';
+import LifecycleDemo from './components/LifecycleDemo';
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(<LifecycleDemo initialCount={0} />);
+```

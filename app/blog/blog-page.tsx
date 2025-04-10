@@ -4,13 +4,19 @@ import PostCard from '@/components/PostCard'
 import Link from '@/components/Link'
 import Divider from '@/components/Divider'
 import { Post } from 'contentlayer/generated'
+import { useState } from 'react'
 
 export default function Blog({ tags, posts, plogTag = false }) {
   const MAX_DISPLAY = 4
   const showingPosts = posts.slice(0, MAX_DISPLAY)
+  const [showAllTags, setShowAllTags] = useState(false)
 
   const tagKeys = Object.keys(tags)
   const sortedTags = tagKeys.sort((a, b) => tags[b] - tags[a])
+  
+  // 热门标签（数量前8个）和其他标签
+  const popularTags = sortedTags.slice(0, 8)
+  const remainingTags = sortedTags.slice(8)
 
   const timeMap: Map<string, Map<string, Array<Post>>> = new Map()
   for (const post of posts) {
@@ -46,23 +52,54 @@ export default function Blog({ tags, posts, plogTag = false }) {
 
         <div>
           <PageTitle>Tags</PageTitle>
-          <div className="flex flex-wrap gap-4">
-            {sortedTags.map((t) => {
-              return (
-                <span
-                  key={t}
-                  className="overflow-hidden rounded-md border-2 text-2xl font-bold duration-300 hover:scale-110"
-                >
-                  <Link href={`/tags/${t}`}>
-                    <span className="p-2 text-hans-100">{t.toUpperCase()}</span>
-                    <span className="bg-gray-100 p-2 text-gray-500 dark:bg-gray-700 dark:text-hans-400">
-                      {tags[t]}
-                    </span>
-                  </Link>
-                </span>
-              )
-            })}
+          <div className="mb-4">
+            <div className="flex flex-wrap gap-4">
+              {popularTags.map((t) => {
+                return (
+                  <span
+                    key={t}
+                    className="overflow-hidden rounded-md border-2 text-2xl font-bold duration-300 hover:scale-110"
+                  >
+                    <Link href={`/tags/${t}`}>
+                      <span className="p-2 text-hans-100">{t.toUpperCase()}</span>
+                      <span className="bg-gray-100 p-2 text-gray-500 dark:bg-gray-700 dark:text-hans-400">
+                        {tags[t]}
+                      </span>
+                    </Link>
+                  </span>
+                )
+              })}
+            </div>
           </div>
+          {remainingTags.length > 0 && (
+            <>
+              <button
+                onClick={() => setShowAllTags(!showAllTags)}
+                className="mb-4 px-4 py-2 text-sm bg-hans-100 text-white rounded-md hover:bg-hans-200 transition-colors"
+              >
+                {showAllTags ? '收起标签' : `显示更多标签 (${remainingTags.length})`}
+              </button>
+              {showAllTags && (
+                <div className="flex flex-wrap gap-4">
+                  {remainingTags.map((t) => {
+                    return (
+                      <span
+                        key={t}
+                        className="overflow-hidden rounded-md border-2 text-xl font-medium duration-300 hover:scale-110"
+                      >
+                        <Link href={`/tags/${t}`}>
+                          <span className="p-1.5 text-hans-100">{t.toUpperCase()}</span>
+                          <span className="bg-gray-100 p-1.5 text-gray-500 dark:bg-gray-700 dark:text-hans-400">
+                            {tags[t]}
+                          </span>
+                        </Link>
+                      </span>
+                    )
+                  })}
+                </div>
+              )}
+            </>
+          )}
         </div>
 
         <div>

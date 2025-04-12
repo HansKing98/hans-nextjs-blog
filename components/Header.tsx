@@ -8,6 +8,7 @@ import Logo from '../public/static/images/logo.png'
 import SearchButton from './SearchButton'
 import { FloatingNav } from '@/components/ui/floating-navbar'
 import { Home } from 'lucide-react'
+import { Pointer, PointerCustomPinkCircle, PointerColoredPointer } from '@/components/ui/pointer'
 
 const Header = () => {
   const navItems = [
@@ -27,6 +28,7 @@ const Header = () => {
       <div>
         <Link href="/" aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between gap-3 ">
+            <PointerCustomPinkCircle />
             <Image className="rounded-md" src={Logo} alt="logo" width={36} height={36} />
             {typeof siteMetadata.headerTitle === 'string' ? (
               <div className="hidden px-2 text-2xl font-bold sm:block">

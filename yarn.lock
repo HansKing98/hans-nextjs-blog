@@ -4528,6 +4528,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "clsx@npm:2.1.1"
+  checksum: acd3e1ab9d8a433ecb3cc2f6a05ab95fe50b4a3cfc5ba47abb6cbf3754585fcb87b84e90c822a1f256c4198e3b41c7f6c391577ffc8678ad587fc0976b24fd57
+  languageName: node
+  linkType: hard
+
 "color-convert@npm:^1.9.0":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
@@ -6048,6 +6055,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"framer-motion@npm:^12.6.5":
+  version: 12.6.5
+  resolution: "framer-motion@npm:12.6.5"
+  dependencies:
+    motion-dom: ^12.6.5
+    motion-utils: ^12.6.5
+    tslib: ^2.4.0
+  peerDependencies:
+    "@emotion/is-prop-valid": "*"
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: bff4ce055686028a8aafa8629e391b3c470bfbab8eaf3d367272fb7ea2f9e1372fafd6ac1279ba2e23230595a9e2e9f6d25db5f1a8d373a1345a2f3895c74d3f
+  languageName: node
+  linkType: hard
+
 "fs-minipass@npm:^2.0.0":
   version: 2.1.0
   resolution: "fs-minipass@npm:2.1.0"
@@ -6374,6 +6403,7 @@ __metadata:
     "@vercel/analytics": ^1.0.2
     antd: ^5.12.8
     autoprefixer: ^10.4.13
+    clsx: ^2.1.1
     contentlayer: 0.3.4
     cross-env: ^7.0.3
     esbuild: 0.18.11
@@ -6381,6 +6411,7 @@ __metadata:
     eslint-config-next: 14.0.3
     eslint-config-prettier: ^8.8.0
     eslint-plugin-prettier: ^5.0.0
+    framer-motion: ^12.6.5
     github-slugger: ^1.4.0
     gray-matter: ^4.0.2
     hast-util-from-html-isomorphic: ^2.0.0
@@ -6408,6 +6439,7 @@ __metadata:
     remark-footnotes: ^4.0.1
     remark-gfm: ^3.0.1
     remark-math: ^5.1.1
+    tailwind-merge: ^3.2.0
     tailwindcss: ^3.3.3
     typed.js: ^2.0.132
     typescript: ^5.1.3
@@ -8881,6 +8913,22 @@ __metadata:
   version: 0.5.2
   resolution: "moo@npm:0.5.2"
   checksum: 5a41ddf1059fd0feb674d917c4774e41c877f1ca980253be4d3aae1a37f4bc513f88815041243f36f5cf67a62fb39324f3f997cf7fb17b6cb00767c165e7c499
+  languageName: node
+  linkType: hard
+
+"motion-dom@npm:^12.6.5":
+  version: 12.6.5
+  resolution: "motion-dom@npm:12.6.5"
+  dependencies:
+    motion-utils: ^12.6.5
+  checksum: d59624e63fce717b036b7beebe3ba32fb69821ffbba4b0671dce4e56881c5009c36cfd406010f9e5650a03b9b36dcb6fb9be842aa52579cbe1d150126910b61d
+  languageName: node
+  linkType: hard
+
+"motion-utils@npm:^12.6.5":
+  version: 12.6.5
+  resolution: "motion-utils@npm:12.6.5"
+  checksum: d0f7d47ac6b73f655266014220b9c0c2e14bed0af2544a8c7117fd861446a41374e0407419b4552654059c497fcd85fd22e1d5ce500b35917f2bceccb10ba11c
   languageName: node
   linkType: hard
 
@@ -11885,6 +11933,13 @@ __metadata:
     "@pkgr/core": ^0.1.0
     tslib: ^2.6.2
   checksum: 9ed5d33abb785f5f24e2531efd53b2782ca77abf7912f734d170134552b99001915531be5a50297aa45c5701b5c9041e8762e6cd7a38e41e2461c1e7fccdedf8
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "tailwind-merge@npm:3.2.0"
+  checksum: 942e86ef6fffd9b9bdb6ab41626ef013ebebca001e1b7c183a2c426ea7169a915d47485c2c4d73a91f4ff390df99645c262e47b8f0be8a7e18837b512f196068
   languageName: node
   linkType: hard
 

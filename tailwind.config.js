@@ -34,6 +34,7 @@ module.exports = {
         },
         primary: colors.teal,
         gray: colors.neutral,
+        sky: colors.sky,
         hans: {
           100: '#BBB581',
           200: '#5D6833',

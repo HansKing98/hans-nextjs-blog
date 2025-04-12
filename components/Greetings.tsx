@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Typed from 'typed.js'
 import Emoji from '@/components/twemoji'
@@ -14,14 +15,14 @@ const Greetings = () => {
   React.useEffect(() => {
     const options = {
       strings: [
-        'Like Web from 2018.',
-        'I was raised in Tianjin.',
-        'I like 🏊‍♂️ / 🏃 / 🏸.',
-        'I like G·E·M. 🎤',
+        'He’s been passionate about web development since 2018.',
+        'Raised in the vibrant city of Tianjin, he carries a unique perspective shaped by its rich culture.',
+        'he like 🏊‍♂️ / 🏃 / 🏸.',
+        'and a fan of G·E·M.’s music🎤',
         '...',
       ],
-      typeSpeed: 50,
-      backSpeed: 50,
+      typeSpeed: 10,
+      backSpeed: 30,
       loop: true,
     }
 
@@ -42,15 +43,11 @@ const Greetings = () => {
       </h1>
       <div className="prose dark:prose-dark lg:prose-lg">
         <p>
-          Welcome! I’m <b>hans</b>. <Emoji kind="partyingFace" />
+          Welcome! He's <b>hans</b>. <Emoji kind="partyingFace" />
         </p>
-
-        <p>hans is the abbreviation I use on social media.</p>
-
         <div className="type-wrap">
           <span style={{ whiteSpace: 'pre' }} ref={el} />
           <br />
-
           <p>
             This website is used to introduce myself, publish some regular blogs, document my travel
             diaries, as well as record books, movies, and music I've experienced. Feel free to{' '}

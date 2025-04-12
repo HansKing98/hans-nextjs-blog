@@ -10,6 +10,7 @@ export default function Blog({ tags, posts, plogTag = false }) {
   const MAX_DISPLAY = 4
   const showingPosts = posts.slice(0, MAX_DISPLAY)
   const [showAllTags, setShowAllTags] = useState(false)
+  const [loadingLink, setLoadingLink] = useState<string | null>(null)
 
   const tagKeys = Object.keys(tags)
   const sortedTags = tagKeys.sort((a, b) => tags[b] - tags[a])
@@ -33,11 +34,15 @@ export default function Blog({ tags, posts, plogTag = false }) {
     }
   }
 
+  const handleLinkClick = (slug: string) => {
+    setLoadingLink(slug)
+  }
+
   return (
     <>
       <div className="space-y-14">
         {/* 最近文章部分 */}
-        <section className="rounded-lg bg-gradient-to-br from-gray-50 to-white p-6 shadow-sm dark:from-gray-900 dark:to-gray-950">
+        {/* <section className="rounded-lg bg-gradient-to-br from-gray-50 to-white p-6 shadow-sm dark:from-gray-900 dark:to-gray-950">
           <PageTitle>Recent Posts</PageTitle>
           <ul
             className="grid gap-6 pt-4 sm:grid-cols-1 lg:grid-cols-2"
@@ -55,11 +60,11 @@ export default function Blog({ tags, posts, plogTag = false }) {
               )
             })}
           </ul>
-        </section>
+        </section> */}
 
         {/* 标签部分 */}
-        <section className="rounded-lg bg-gradient-to-br from-gray-50 to-white p-6 shadow-sm dark:from-gray-900 dark:to-gray-950">
-          <PageTitle>Tags</PageTitle>
+        <section className="rounded-lg bg-gradient-to-br from-[#ffffff483] to-[#ffffff962] p-6 dark:from-[#ffffff483] dark:to-[#ffffff483]">
+          {/* <PageTitle>Tags</PageTitle> */}
           <div className="mt-4">
             <div className="flex flex-wrap gap-3">
               {popularTags.map((t) => {
@@ -111,7 +116,7 @@ export default function Blog({ tags, posts, plogTag = false }) {
         </section>
 
         {/* 归档部分 */}
-        <section className="rounded-lg bg-gradient-to-br from-gray-50 to-white p-6 shadow-sm dark:from-gray-900 dark:to-gray-950">
+        <section className="rounded-lg bg-gradient-to-br  from-[#ffffff483] to-[#ffffff962] p-6 dark:[#ffffff483] dark:[#ffffff483]">
           <PageTitle>Archive</PageTitle>
           <div className="mt-4 space-y-8">
             {Array.from(timeMap.keys()).map((year) => {
@@ -155,19 +160,31 @@ export default function Blog({ tags, posts, plogTag = false }) {
                               const formattedDate = `${year}-${month}-${day}`
                               return (
                                 <div
-                                  className="group rounded-lg p-2 transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                  className="group rounded-lg p-2 transition-colors duration-200 hover:bg-[#ffffff55] dark:hover:bg-[#00000065] relative"
                                   key={post.slug}
                                 >
                                   <div className="flex flex-wrap items-center gap-2">
                                     <span className="inline-block whitespace-nowrap text-sm font-medium text-gray-400 dark:text-gray-500">
                                       {formattedDate}
                                     </span>
-                                    <Link href={`/blog/${post.slug}`} className="w-full sm:w-auto">
-                                      <span className="text-lg font-bold text-hans-100 transition-colors group-hover:text-hans-200 dark:text-opacity-80">
-                                        {post.title}
+                                    <Link
+                                      href={`/blog/${post.slug}`}
+                                      className="w-full sm:w-auto relative"
+                                      onClick={() => handleLinkClick(post.slug)}
+                                    >
+                                      <span className="text-lg font-bold text-hans-100 transition-colors group-hover:text-hans-200 dark:text-opacity-80 inline">
+                                        {post.title}{' '}
+                                        {/* <a className="text-[10px] text-gray-500 font-light dark:text-gray-400 mb-[10px]">
+                                          {post.wordCount} 字
+                                        </a> */}
                                       </span>
                                     </Link>
                                   </div>
+                                  {loadingLink === post.slug && (
+                                    <div className="absolute right-4 bottom-1/2 translate-y-1/2">
+                                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-900 dark:border-gray-100"></div>
+                                    </div>
+                                  )}
                                 </div>
                               )
                             })}

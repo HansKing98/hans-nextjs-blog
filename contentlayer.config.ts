@@ -23,6 +23,7 @@ import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
 import octicons from '@primer/octicons'
 import { pinyin } from 'pinyin-pro'
+import count from 'word-count'
 
 const root = process.cwd()
 
@@ -52,6 +53,11 @@ const computedFields: ComputedFields = {
     type: 'string',
     resolve: (doc) => extractTocHeadings(doc.body.raw).then((res) => JSON.stringify(res)),
   },
+  description: {
+    type: 'string',
+    resolve: (doc) => doc.summary,
+  },
+  wordCount: { type: 'number', resolve: (doc) => count(doc.body.raw) },
 }
 
 /**

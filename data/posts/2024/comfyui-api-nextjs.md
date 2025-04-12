@@ -2,11 +2,9 @@
 title: ComfyUI一键写真（包含NextJS封装ComfyUI API）
 date: 2024-04-01 00:48:17
 tags:
-  [AI]
-
+  [AI,top]
+summary: 分享一份使用Next.js封装ComfyUI API的源码示例。代码展示了如何高效整合前端框架与后端API，实现流畅的功能调用。
 ---
-
-
 
 # 用nextjs封装了 ComfyUI API
 

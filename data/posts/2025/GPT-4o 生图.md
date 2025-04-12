@@ -2,11 +2,12 @@
 title: GPT-4o 生图 
 date: 2025-04-08 18:32:19
 tags:
-  [AI]
+  [AI, top]
 image: https://image.hansking.cn/picgo/%E6%88%AA%E5%B1%8F2025-04-08%2018.31.48.png
+summary: 本文展示了多种GPT-4o图像处理方式，包括将照片转为Ghibli风格、图标3D化、Q版3D人物互动、Q版人像大头照，以及设计极简潮玩售货机场景。 每种方式注重细节与风格化呈现，兼具创意与实用性。
 ---
 
-# ComfyUI 人像写真工作流 
+# GPT-4o 生图 
 
 1. convert photo to ghibli style
 

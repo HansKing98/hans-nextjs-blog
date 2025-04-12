@@ -35,7 +35,7 @@ module.exports = {
         primary: colors.teal,
         gray: colors.neutral,
         hans: {
-          100: '#ABB581',
+          100: '#BBB581',
           200: '#5D6833',
           300: '#6F90B5',
           400: '#ADBAC7',

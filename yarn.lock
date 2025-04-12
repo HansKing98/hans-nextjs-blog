@@ -6418,6 +6418,7 @@ __metadata:
     husky: ^8.0.0
     image-size: 1.0.0
     lint-staged: ^13.0.0
+    lucide-react: ^0.487.0
     next: 14.0.3
     next-contentlayer: 0.3.4
     next-themes: ^0.2.1
@@ -7898,6 +7899,15 @@ __metadata:
   dependencies:
     yallist: ^4.0.0
   checksum: f97f499f898f23e4585742138a22f22526254fdba6d75d41a1c2526b3b6cc5747ef59c5612ba7375f42aca4f8461950e925ba08c991ead0651b4918b7c978297
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:^0.487.0":
+  version: 0.487.0
+  resolution: "lucide-react@npm:0.487.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 76685492d6ded790a3fcc585066c369249a64c72b21fd4a514e1011ed65b7dc533f154bc59f38d8bd67129be065cf5bc194c144c8ecddbd5c651da55270d3a30
   languageName: node
   linkType: hard
 

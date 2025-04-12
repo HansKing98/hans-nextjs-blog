@@ -6,8 +6,22 @@ import ThemeSwitch from './ThemeSwitch'
 import Image from 'next/image'
 import Logo from '../public/static/images/logo.png'
 import SearchButton from './SearchButton'
+import { FloatingNav } from '@/components/ui/floating-navbar'
+import { Home } from 'lucide-react'
 
 const Header = () => {
+  const navItems = [
+    {
+      name: 'Home',
+      link: '/',
+      icon: <Home className="h-4 w-4 text-neutral-500 dark:text-white" />,
+    },
+    ...headerNavLinks.map((link) => ({
+      name: link.title,
+      link: link.href,
+      icon: link.icon,
+    })),
+  ]
   return (
     <header className="flex items-center justify-between py-10 z-10 rounded-b-lg p-4">
       <div>
@@ -25,6 +39,10 @@ const Header = () => {
         </Link>
       </div>
       <div className="flex items-center text-base leading-5">
+        {/*  */}
+        <FloatingNav navItems={navItems} />
+
+        {/*  */}
         <div className="hidden sm:block">
           {headerNavLinks.map((link) => (
             <Link

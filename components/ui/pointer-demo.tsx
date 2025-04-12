@@ -1,14 +1,8 @@
-"use client";
+'use client'
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Pointer } from "@/components/ui/pointer";
-import { motion } from "framer-motion";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Pointer } from '@/components/ui/pointer'
+import { motion } from 'framer-motion'
 
 export function PointerDemo() {
   return (
@@ -34,7 +28,7 @@ export function PointerDemo() {
             transition={{
               duration: 1.5,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
           >
             <svg
@@ -52,7 +46,7 @@ export function PointerDemo() {
                 transition={{
                   duration: 0.8,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: 'easeInOut',
                 }}
               />
             </svg>
@@ -118,5 +112,5 @@ export function PointerDemo() {
         </Pointer>
       </Card>
     </div>
-  );
-} 
+  )
+}

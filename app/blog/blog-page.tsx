@@ -170,7 +170,7 @@ export default function Blog({ tags, posts, plogTag = false }) {
                                     <Link
                                       href={`/blog/${post.slug}`}
                                       className="w-full sm:w-auto relative"
-                                      onClick={() => handleLinkClick(post.slug)}
+                                      onClick={() => handleLinkClick(post?.slug || '')}
                                     >
                                       <span className="text-lg font-bold text-hans-100 transition-colors group-hover:text-hans-200 dark:text-opacity-80 inline">
                                         {post.title}{' '}

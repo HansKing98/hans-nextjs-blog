@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import React from "react"
-import { FloatingNav } from "@/components/ui/floating-navbar"
-import { Home, MessageSquare, User } from "lucide-react"
-import headerNavLinks from "@/data/headerNavLinks"
+import React from 'react'
+import { FloatingNav } from '@/components/ui/floating-navbar'
+import { Home, MessageSquare, User } from 'lucide-react'
+import headerNavLinks from '@/data/headerNavLinks'
 
 export function FloatingNavDemo() {
   const navItems = [
@@ -36,4 +36,4 @@ const DummyContent = () => {
       <div className="inset-0 absolute bg-grid-black/[0.1] dark:bg-grid-white/[0.2]" />
     </div>
   )
-} 
+}

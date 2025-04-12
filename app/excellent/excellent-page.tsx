@@ -2,10 +2,10 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
+import { CoreContent } from 'pliny/utils/contentlayer'
 import { Post } from 'contentlayer/generated'
-
 interface ExcellentPageProps {
-  posts: Post[]
+  posts: CoreContent<Post>[]
   tags?: Record<string, number>
 }
 

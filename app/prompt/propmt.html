@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPT-4o 生图展示</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #5046e5;
+            --secondary-color: #8f88f7;
+            --text-color-light: #333;
+            --text-color-dark: #f1f1f1;
+            --bg-color-light: #ffffff;
+            --bg-color-dark: #111827;
+            --card-bg-light: #f8f9fa;
+            --card-bg-dark: #1f2937;
+        }
+
+        .dark {
+            --primary-color: #6366f1;
+            --secondary-color: #a5b4fc;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+        }
+
+        .dark body {
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-dark);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .card {
+            background-color: var(--card-bg-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 1px solid #eaeaea;
+            overflow: hidden;
+        }
+
+        .dark .card {
+            background-color: var(--card-bg-dark);
+            border-color: #374151;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .dark .card:hover {
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn {
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+        }
+
+        #content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        #content img:hover {
+            transform: scale(1.02);
+        }
+
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .loaded {
+            opacity: 1;
+        }
+
+        .social-icon {
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+            color: var(--primary-color);
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background-color: var(--primary-color);
+            z-index: 100;
+            transition: width 0.2s ease;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="scroll-progress"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="sticky top-0 z-50 backdrop-filter backdrop-blur-md bg-opacity-80 bg-white dark:bg-gray-900 dark:bg-opacity-80 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-paint-brush text-indigo-600 dark:text-indigo-400 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-gray-900 dark:text-white">GPT-4o 生图</span>
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <button id="theme-toggle" class="theme-toggle p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none">
+                        <i class="fas fa-sun text-lg hidden dark:block"></i>
+                        <i class="fas fa-moon text-lg block dark:hidden"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容区 -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- 头部内容 -->
+        <header class="fade-in mb-12 text-center">
+            <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">GPT-4o 生图</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                展示多种GPT-4o图像处理方式，包括吉卜力风格转换、3D图标、Q版人物互动等创意应用。
+            </p>
+            <div class="mt-8 flex justify-center">
+                <span class="inline-flex rounded-md shadow-sm">
+                    <a href="#gallery" class="btn inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none">
+                        <i class="fas fa-images mr-2"></i>浏览作品集
+                    </a>
+                </span>
+            </div>
+        </header>
+
+        <!-- 内容摘要 -->
+        <section class="fade-in mb-16 bg-indigo-50 dark:bg-gray-800 rounded-lg p-6 shadow-md">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">内容摘要</h2>
+            <p class="text-gray-700 dark:text-gray-300">
+                本文展示了多种GPT-4o图像处理方式，包括将照片转为Ghibli风格、图标3D化、Q版3D人物互动、Q版人像大头照，以及设计极简潮玩售货机场景。每种方式注重细节与风格化呈现，兼具创意与实用性。
+            </p>
+        </section>
+
+        <!-- 展示画廊 -->
+        <section id="gallery" class="fade-in mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
+                <i class="fas fa-palette mr-3 text-indigo-500"></i>作品展示
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 吉卜力风格 -->
+                <div class="card rounded-xl overflow-hidden shadow-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">1. 照片转吉卜力风格</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">将普通照片转换为吉卜力工作室标志性的动画风格。</p>
+                        <div class="overflow-hidden rounded-lg">
+                            <img class="lazy-load w-full h-auto" data-src="https://image.hansking.cn/picgo/%E6%88%AA%E5%B1%8F2025-04-08%2019.21.32.png" alt="吉卜力风格转换" src="/api/placeholder/600/400" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 古书籍故事 -->
+                <div class="card rounded-xl overflow-hidden shadow-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">2. 走出古书籍的故事</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">创作3D场景，展示古书中武松打虎故事的立体呈现。</p>
+                        <div class="overflow-hidden rounded-lg">
+                            <img class="lazy-load w-full h-auto" data-src="https://image.hansking.cn/picgo/GobJjorW8AAs9gh.png" alt="古书籍故事" src="/api/placeholder/600/400" />
+                        </div>
+                        <div class="mt-4 overflow-hidden rounded-lg">
+                            <img class="lazy-load w-full h-auto" data-src="https://image.hansking.cn/picgo/GobJs_AWAAAFOoz.png" alt="古书籍故事2" src="/api/placeholder/600/400" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3D图标转换 -->
+                <div class="card rounded-xl overflow-hidden shadow-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">3. 线性图标转3D</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">一键将普通线性图标转换为精美的3D立体效果。</p>
+                        <div class="overflow-hidden rounded-lg">
+                            <img class="lazy-load w-full h-auto" data-src="https://image.hansking.cn/picgo/%E6%88%AA%E5%B1%8F2025-04-08%2019.21.54.png" alt="3D图标转换" src="/api/placeholder/600/400" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q版3D人物互动 -->
+                <div class="card rounded-xl overflow-hidden shadow-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">4. Q版3D人物互动</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">将图片中的人物变成皮克斯风格的3D Q版角色，从画中伸出手与现实互动。</p>
+                        <div class="overflow-hidden rounded-lg">
+                            <img class="lazy-load w-full h-auto" data-src="https://image.hansking.cn/picgo/%E6%88%AA%E5%B1%8F2025-04-08%2019.22.27.png" alt="Q版3D人物互动" src="/api/placeholder/600/400" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q版人像大头照 -->
+                <div class="card rounded-xl overflow-hidden shadow-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">5. Q版人像大头照</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">将普通照片转换为萌趣可爱的Q版人像大头照，保持人物特征。</p>
+                        <div class="overflow-hidden rounded-lg">
+                            <img class="lazy-load w-full h-auto" data-src="https://image.hansking.cn/picgo/%E6%88%AA%E5%B1%8F2025-04-08%2019.23.03.png" alt="Q版人像大头照" src="/api/placeholder/600/400" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 极简潮玩售货机 -->
+                <div class="card rounded-xl overflow-hidden shadow-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white">6. 极简潮玩售货机场景</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">以等距视角呈现的潮玩售货机，展示外部与内部工作间的创意场景。</p>
+                        <div class="overflow-hidden rounded-lg">
+                            <img class="lazy-load w-full h-auto" data-src="https://image.hansking.cn/picgo/ChatGPT%20Image%202025%E5%B9%B44%E6%9C%888%E6%97%A5%2017_53_12.png" alt="极简潮玩售货机" src="/api/placeholder/600/400" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技术解析 -->
+        <section class="fade-in mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
+                <i class="fas fa-cogs mr-3 text-indigo-500"></i>技术解析
+            </h2>
+            <div class="card p-6 rounded-xl shadow-lg">
+                <div class="prose prose-indigo dark:prose-invert max-w-none">
+                    <p>GPT-4o 是OpenAI最新的多模态大型语言模型，具备强大的图像处理能力。它能够：</p>
+                    <ul class="space-y-2 mt-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>理解并遵循复杂的图像生成指令</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>将普通照片转换为特定艺术风格</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>创建具有3D效果的图像和场景</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>生成Q版卡通人物并保持原始特征</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>设计复杂的创意场景和概念插图</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-100 dark:bg-gray-900 py-12 border-t border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">作者信息</h3>
+                    <p class="text-gray-600 dark:text-gray-400">[作者姓名]</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/[username]" class="social-icon text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="https://twitter.com/[username]" class="social-icon text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/[username]" class="social-icon text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
+                <p class="text-gray-500 dark:text-gray-400">&copy; 2025 版权所有。保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 深色模式切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // 初始设置
+        if (prefersDarkScheme.matches) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            document.documentElement.classList.toggle('dark');
+        });
+        
+        // 懒加载图片
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = document.querySelectorAll(".lazy-load");
+            
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.add("loaded");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            } else {
+                // 回退方案
+                let lazyImagesList = Array.prototype.slice.call(lazyImages);
+                
+                function lazyLoad() {
+                    lazyImagesList.forEach(function(lazyImage) {
+                        if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.add("loaded");
+                            lazyImagesList = lazyImagesList.filter(function(image) { return image !== lazyImage; });
+                            
+                            if (lazyImagesList.length === 0) {
+                                document.removeEventListener("scroll", lazyLoad);
+                                window.removeEventListener("resize", lazyLoad);
+                                window.removeEventListener("orientationChange", lazyLoad);
+                            }
+                        }
+                    });
+                }
+                
+                document.addEventListener("scroll", lazyLoad);
+                window.addEventListener("resize", lazyLoad);
+                window.addEventListener("orientationChange", lazyLoad);
+            }
+        });
+        
+        // 滚动进度条
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.scrollY;
+            let docHeight = document.body.offsetHeight;
+            let winHeight = window.innerHeight;
+            let scrollPercent = scrollTop / (docHeight - winHeight);
+            let scrollPercentRounded = Math.round(scrollPercent * 100);
+            
+            document.querySelector(".scroll-progress").style.width = scrollPercentRounded + "%";
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 添加动画效果
+        const fadeElems = document.querySelectorAll('.fade-in');
+        
+        function checkFade() {
+            fadeElems.forEach(elem => {
+                const rect = elem.getBoundingClientRect();
+                const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+                
+                if (!(rect.bottom < 0 || rect.top - viewHeight >= 0)) {
+                    elem.style.opacity = 1;
+                    elem.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('resize', checkFade);
+        window.addEventListener('load', checkFade);
+    </script>
+</body>
+</html>

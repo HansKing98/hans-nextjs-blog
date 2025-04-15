@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import AppStoreComponent from './app-store-component'
 

@@ -1,3 +1,4 @@
+'use client'
 import PromptComponent from './prompt-component'
 import { metadata } from './metadata'
 

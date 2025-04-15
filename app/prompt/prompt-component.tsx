@@ -1,16 +1,13 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { galleryItems } from './list'
 import Script from 'next/script'
-import { CopyIcon } from 'lucide-react'
+import { CopyIcon, CheckIcon } from 'lucide-react'
 import { Tooltip, ConfigProvider, theme } from 'antd'
-import { motion } from 'framer-motion'
-
-type EventName = 'scroll' | 'resize' | 'orientationChange'
-
-// 定义常量：列数
-const COLUMN_COUNT = 3
+import { motion, AnimatePresence } from 'framer-motion'
+import { Masonry } from 'masonic'
+import Image from 'next/image'
 
 // 动画变体
 const fadeInUp = {
@@ -19,26 +16,78 @@ const fadeInUp = {
 }
 
 export default function PromptComponent() {
-  // 瀑布流布局状态
-  const [columns, setColumns] = useState<Array<Array<(typeof galleryItems)[0]>>>([[], [], []])
   // 深色模式状态
   const [isDarkMode, setIsDarkMode] = useState(false)
+  // 选中的项目状态
+  const [selectedItem, setSelectedItem] = useState<number | null>(null)
+  const [copied, setCopied] = useState(false)
 
-  // 初始化瀑布流
+  const handleCardClick = (id: number) => {
+    setSelectedItem(id)
+  }
+
+  const handleClose = () => {
+    setSelectedItem(null)
+  }
+
+  // 添加ESC键关闭功能
   useEffect(() => {
-    // 将数据分配到不同列中
-    const newColumns: Array<Array<(typeof galleryItems)[0]>> = Array(COLUMN_COUNT)
-      .fill(null)
-      .map(() => [])
+    const handleEscClose = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && selectedItem !== null) {
+        handleClose()
+      }
+    }
 
-    galleryItems.forEach((item, index) => {
-      // 根据索引分配到不同列，实现基本的均匀分布
-      const columnIndex = index % COLUMN_COUNT
-      newColumns[columnIndex].push(item)
-    })
+    window.addEventListener('keydown', handleEscClose)
+    return () => {
+      window.removeEventListener('keydown', handleEscClose)
+    }
+  }, [selectedItem])
 
-    setColumns(newColumns)
-  }, [])
+  // Masonry卡片组件
+  const MasonryCard = ({ index, data, width }) => {
+    const item = data
+    return (
+      <motion.div
+        key={item.id}
+        layoutId={`card-container-${item.id}`}
+        className="cursor-pointer overflow-hidden rounded-xl shadow-lg mb-[30px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300"
+        onClick={() => handleCardClick(item.id)}
+        whileHover={{ y: -5, boxShadow: '0 12px 20px rgba(0, 0, 0, 0.1)' }}
+      >
+        <div className="p-0 relative">
+          <motion.h3
+            layoutId={`card-title-${item.id}`}
+            className="text-xl font-bold mb-3 px-6 text-gray-900 dark:text-white"
+          >
+            {item.id}. {item.title}
+          </motion.h3>
+          {/* 主图展示 */}
+          {item.images.length > 0 && (
+            <motion.div layoutId={`card-image-${item.id}`} className="overflow-hidden rounded-lg">
+              {item.images?.map((image, index) => (
+                <Image
+                  key={index}
+                  className="w-full h-auto"
+                  src={image.src}
+                  alt={image.alt}
+                  width={300}
+                  height={300}
+                />
+              ))}
+            </motion.div>
+          )}
+
+          <motion.p
+            layoutId={`card-description-${item.id}`}
+            className="text-gray-600 dark:text-gray-400 mb-4 px-6"
+          >
+            {item.description}
+          </motion.p>
+        </div>
+      </motion.div>
+    )
+  }
 
   return (
     <ConfigProvider
@@ -109,81 +158,141 @@ export default function PromptComponent() {
             <i className="fas fa-palette mr-3 text-indigo-500"></i>Prompt 展示
           </motion.h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {columns.map((column, columnIndex) => (
-              <div key={columnIndex} className="flex flex-col gap-5">
-                {column.map((item) => (
-                  <PromptCard key={item.id} item={item} />
-                ))}
-              </div>
-            ))}
-          </div>
+          {/* Masonry瀑布流布局 */}
+          <Masonry
+            items={galleryItems}
+            render={MasonryCard}
+            columnGutter={16}
+            columnWidth={200}
+            className="bg-clip-padding"
+          />
         </section>
       </main>
+
+      {/* 详情弹窗 */}
+      <AnimatePresence>
+        {selectedItem !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            onClick={handleClose}
+          >
+            <motion.div
+              className="relative m-4 h-[80vh] w-full max-w-4xl overflow-hidden rounded-3xl bg-white dark:bg-gray-800 shadow-2xl"
+              layoutId={`card-container-${selectedItem}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {galleryItems.find((item) => item.id === selectedItem) && (
+                <>
+                  <div className="relative h-[calc(80vh-250px)] p-6 bg-white dark:bg-gray-800 overflow-y-auto">
+                    <button
+                      onClick={handleClose}
+                      className="absolute right-6 top-6 rounded-full bg-black/20 dark:bg-white/20 p-2 text-white z-20"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        className="h-6 w-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+
+                    <div className="mb-8">
+                      <motion.h3
+                        layoutId={`card-title-${selectedItem}`}
+                        className="text-3xl font-bold text-gray-900 dark:text-white mb-4"
+                      >
+                        {galleryItems.find((item) => item.id === selectedItem)?.id}.{' '}
+                        {galleryItems.find((item) => item.id === selectedItem)?.title}
+                      </motion.h3>
+                      <motion.p
+                        layoutId={`card-description-${selectedItem}`}
+                        className="text-lg text-gray-700 dark:text-gray-300 mb-6"
+                      >
+                        {galleryItems.find((item) => item.id === selectedItem)?.description}
+                      </motion.p>
+                    </div>
+
+                    {/* 所有图片展示 */}
+                    <div className="space-y-6">
+                      {galleryItems
+                        .find((item) => item.id === selectedItem)
+                        ?.images.map((image, index) => (
+                          <div key={index} className="overflow-hidden rounded-lg">
+                            {index === 0 ? (
+                              <motion.div layoutId={`card-image-${selectedItem}`}>
+                                <Image
+                                  src={image.src}
+                                  alt={image.alt}
+                                  className="w-full h-auto"
+                                  width={300}
+                                  height={300}
+                                />
+                              </motion.div>
+                            ) : (
+                              <Image
+                                src={image.src}
+                                alt={image.alt}
+                                className="w-full h-auto"
+                                width={300}
+                                height={300}
+                              />
+                            )}
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+
+                  {/* Prompt展示区域 */}
+                  <PromptCard selectedItem={selectedItem} />
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </ConfigProvider>
   )
 }
 
-// PromptCard 组件
-function PromptCard({ item }: { item: (typeof galleryItems)[0] }) {
-  const handleCopyPrompt = (prompt: string, id: number) => {
-    navigator.clipboard.writeText(prompt || '')
-    // 复制成功后更新图标显示
-    const button = document.getElementById(`copy-btn-${id}`)
-    if (button) {
-      button.innerHTML = '<i class="fas fa-check"></i>'
-      setTimeout(() => {
-        button.innerHTML = '<i class="fas fa-copy"></i>'
-      }, 2000)
-    }
-  }
-
+const PromptCard = ({ selectedItem }) => {
+  const [copied, setCopied] = useState(false)
   return (
-    <motion.div
-      className="rounded-xl overflow-hidden shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-500 transition-all duration-300"
-      initial="hidden"
-      animate="visible"
-      variants={fadeInUp}
-      whileHover={{ y: -5, boxShadow: '0 12px 20px rgba(0, 0, 0, 0.1)' }}
-    >
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-          {item.id}. {item.title}
-        </h3>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">{item.description}</p>
-
-        {/* Prompt展示区域 */}
-        {item.prompt && (
-          <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg mb-4 relative border border-gray-200 dark:border-gray-700">
-            <div className="text-gray-700 dark:text-gray-300 overflow-hidden text-sm font-mono line-clamp-2">
-              {item.prompt}
-            </div>
-            <Tooltip title="复制 Prompt" placement="top" overlayStyle={{ fontSize: '12px' }}>
-              <motion.button
-                onClick={() => handleCopyPrompt(item.prompt || '', item.id)}
-                id={`copy-btn-${item.id}`}
-                className="absolute top-3 right-3 bg-indigo-500 hover:bg-indigo-600 text-white p-1.5 rounded-full transition-all duration-200"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <CopyIcon className="w-4 h-4" />
-              </motion.button>
-            </Tooltip>
-          </div>
-        )}
-
-        {/* 图片区域 */}
-        {item.images.map((image, index) => (
-          <motion.div
-            key={index}
-            className={index > 0 ? 'mt-4 overflow-hidden rounded-lg' : 'overflow-hidden rounded-lg'}
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
+    <div className="h-[250px] overflow-y-auto p-6 bg-gray-100 dark:bg-gray-900">
+      <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Prompt</h4>
+      {galleryItems.find((item) => item.id === selectedItem)?.prompt ? (
+        <div className="relative">
+          <pre className="p-4 bg-white dark:bg-gray-800 rounded-lg overflow-x-auto text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+            {galleryItems.find((item) => item.id === selectedItem)?.prompt}
+          </pre>
+          <button
+            onClick={() => {
+              const prompt = galleryItems.find((item) => item.id === selectedItem)?.prompt
+              if (prompt) {
+                navigator.clipboard.writeText(prompt)
+                setCopied(true)
+                setTimeout(() => setCopied(false), 2000)
+              }
+            }}
+            className="absolute top-3 right-3 bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-full transition-all duration-200"
           >
-            <img className="w-full h-auto" data-src={image.src} src={image.src} alt={image.alt} />
-          </motion.div>
-        ))}
-      </div>
-    </motion.div>
+            {copied ? <CheckIcon className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
+          </button>
+        </div>
+      ) : (
+        <p className="text-gray-500 dark:text-gray-400 italic">该示例未提供Prompt</p>
+      )}
+    </div>
   )
 }

@@ -67,7 +67,13 @@ module.exports = () => {
     },
     images: {
       dangerouslyAllowSVG: true,
-      domains: ['image.hansking.cn', 'opengraph.githubassets.com', 'komarev.com'],
+      domains: [
+        'image.hansking.cn',
+        'opengraph.githubassets.com',
+        'komarev.com',
+        'examples.motion.dev',
+        'liblibai-online.liblib.cloud',
+      ],
       remotePatterns: [
         {
           protocol: 'https',

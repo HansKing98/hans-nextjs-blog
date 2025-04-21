@@ -1,8 +1,10 @@
-'use client'
 import PromptComponent from './prompt-component'
-import { metadata } from './metadata'
+import { genPageMetadata } from '../seo'
 
-export { metadata }
+export const metadata = genPageMetadata({
+  title: 'GPT-4o 生图展示',
+  description: '展示多种GPT-4o图像处理方式，包括吉卜力风格转换、3D图标、Q版人物互动等创意应用。',
+})
 
 export default function Page() {
   return <PromptComponent />

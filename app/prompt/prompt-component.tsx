@@ -6,7 +6,7 @@ import Script from 'next/script'
 import { CopyIcon, CheckIcon } from 'lucide-react'
 import { Tooltip, ConfigProvider, theme } from 'antd'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Masonry } from 'masonic'
+import { Waterfall } from '@/components/Waterfall'
 import Image from 'next/image'
 
 // 动画变体
@@ -44,8 +44,8 @@ export default function PromptComponent() {
     }
   }, [selectedItem])
 
-  // Masonry卡片组件
-  const MasonryCard = ({ index, data, width }) => {
+  // 瀑布流卡片组件
+  const WaterfallCard = ({ data, index, width }) => {
     const item = data
     return (
       <motion.div
@@ -158,12 +158,12 @@ export default function PromptComponent() {
             <i className="fas fa-palette mr-3 text-indigo-500"></i>Prompt 展示
           </motion.h2>
 
-          {/* Masonry瀑布流布局 */}
-          <Masonry
+          {/* 瀑布流布局 */}
+          <Waterfall
             items={galleryItems}
-            render={MasonryCard}
-            columnGutter={16}
-            columnWidth={200}
+            renderItem={WaterfallCard}
+            columnCount={3}
+            columnGap={16}
             className="bg-clip-padding"
           />
         </section>

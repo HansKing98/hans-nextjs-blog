@@ -4,7 +4,7 @@ date: 2025-04-29 15:16:36
 tags:
   [react, next]
 image: 
-summary: 在 Next.js 中，为导航使用 'use client' 会将组件转为客户端组件，导致依赖客户端 JavaScript 执行，增加 hydration 和客户端渲染的开销。适合动态导航、路由事件监听等需要浏览器环境的场景，但可能影响性能。建议尽量减少 'use client' 的使用，优先利用服务器组件和 Next.js 的内置优化（如 <Link> 的预加载）来提升性能和用户体验。
+summary: 在 Next.js 中，为导航使用 'use client' 会将组件转为客户端组件，导致依赖客户端 JavaScript 执行，增加 hydration 和客户端渲染的开销。适合动态导航、路由事件监听等需要浏览器环境的场景，但可能影响性能。建议尽量减少 'use client' 的使用，优先利用服务器组件和 Next.js 的内置优化（如 \<Link\> 的预加载）来提升性能和用户体验。
 ---
 
 # next.js 中 LayoutNav 使用 'use client',会有什么影响
@@ -19,7 +19,7 @@ summary: 在 Next.js 中，为导航使用 'use client' 会将组件转为客户
 - **hydration 的必要性**
 
 - 如果组件使用了 'use client'，Next.js 会在服务器端生成静态 HTML（SSR 或 SSG），但需要在客户端进行 **hydration**，以使交互性生效。
-- 这意味着导航相关的事件监听器（如点击 <Link> 触发页面切换）会在 hydration 完成后生效。如果 JavaScript 加载较慢，用户可能在短时间内体验到非交互状态。
+- 这意味着导航相关的事件监听器（如点击 \<Link\> 触发页面切换）会在 hydration 完成后生效。如果 JavaScript 加载较慢，用户可能在短时间内体验到非交互状态。
 - **性能影响**
 
 - **增加客户端 JavaScript 负担**：使用 'use client' 的组件会将更多代码发送到客户端，增加浏览器解析和执行 JavaScript 的时间，尤其是当导航逻辑复杂或包含大量交互时。

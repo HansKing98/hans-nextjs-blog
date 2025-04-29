@@ -1,5 +1,5 @@
 ---
-title: next.js 中 LayoutNav 使用 'use client' 会有什么影响
+title: next.js 中 LayoutNav 使用 'use client',会有什么影响
 date: 2025-04-29 15:16:36
 tags:
   [react, next]
@@ -53,3 +53,6 @@ summary: 在 Next.js 中，为导航使用 'use client' 会将组件转为客户
 在 Next.js 中，为导航使用 'use client' 会将组件转为客户端组件，导致依赖客户端 JavaScript 执行，增加 hydration 和客户端渲染的开销。适合动态导航、路由事件监听等需要浏览器环境的场景，但可能影响性能。建议尽量减少 'use client' 的使用，优先利用服务器组件和 Next.js 的内置优化（如 <Link> 的预加载）来提升性能和用户体验。
 
 如果有具体代码或场景需要分析，可以提供更多细节，我可以帮你进一步优化！
+
+------
+[【点击继续对话】内容由 Grok 生成：next.js 中 LayoutNav 使用 'use client',会有什么影响](https://x.com/i/grok/share/jMRmXOWKn5PaqLyWlUYAKEcsk)

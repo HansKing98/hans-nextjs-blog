@@ -1,0 +1,15 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+1. 过程文档记录到 .cursor/markdown
+------
+2. 代码格式化规则：
+  不使用分号 (semi: false)
+  使用单引号 (singleQuote: true)
+  行宽限制 100 字符 (printWidth: 100)
+  缩进 2 个空格 (tabWidth: 2)
+  尾随逗号 ES5 格式 (trailingComma: 'es5')
+  对象括号内加空格 (bracketSpacing: true)  
+------

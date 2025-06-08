@@ -5,6 +5,7 @@ alwaysApply: true
 ---
 1. 过程文档记录到 .cursor/markdown
 ------
+你必须遵守如下规则：
 2. 代码格式化规则：
   不使用分号 (semi: false)
   使用单引号 (singleQuote: true)

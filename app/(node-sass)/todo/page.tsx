@@ -194,32 +194,32 @@ export default function TodoPage() {
   const getStatusColor = (status: Todo['status']) => {
     switch (status) {
       case 'completed':
-        return 'text-green-600 bg-green-50'
+        return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20'
       case 'in_progress':
-        return 'text-blue-600 bg-blue-50'
+        return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
       case 'pending':
-        return 'text-yellow-600 bg-yellow-50'
+        return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20'
       case 'cancelled':
-        return 'text-red-600 bg-red-50'
+        return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20'
       case 'on_hold':
-        return 'text-gray-600 bg-gray-50'
+        return 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800'
       default:
-        return 'text-gray-600 bg-gray-50'
+        return 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800'
     }
   }
 
   const getPriorityColor = (priority: Todo['priority']) => {
     switch (priority) {
       case 'urgent':
-        return 'text-red-600'
+        return 'text-red-600 dark:text-red-400'
       case 'high':
-        return 'text-orange-600'
+        return 'text-orange-600 dark:text-orange-400'
       case 'medium':
-        return 'text-yellow-600'
+        return 'text-yellow-600 dark:text-yellow-400'
       case 'low':
-        return 'text-green-600'
+        return 'text-green-600 dark:text-green-400'
       default:
-        return 'text-gray-600'
+        return 'text-gray-600 dark:text-gray-400'
     }
   }
 
@@ -239,45 +239,28 @@ export default function TodoPage() {
   }
 
   return (
-    <div className="min-h-scree py-8">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow p-6">
-        <div className="flex items-center justify-between mb-8 border-b pb-4">
+    <div className="py-8">
+      <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900/20 p-6 transition-colors">
+        <div className="flex items-center justify-between mb-8 border-b border-gray-200 dark:border-gray-700 pb-4">
           <div className="flex items-center">
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">待办事项管理</h1>
+            {username && <span className="ml-4 text-gray-600 dark:text-gray-400">欢迎，{username}</span>}
+          </div>
+
+          <button
+            onClick={handleAddTodo}
+            className="flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-md hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+          >
             <svg
-              className="h-8 w-8 text-blue-600 mr-2"
+              className="h-5 w-5 mr-1"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
             >
-              <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19ZM7 10H9V17H7V10ZM11 7H13V17H11V7ZM15 13H17V17H15V13Z" />
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
             </svg>
-            <h1 className="text-2xl font-bold text-gray-800">智能待办</h1>
-            <span className="ml-4 text-gray-600">欢迎，{username}</span>
-          </div>
-
-          <div className="flex items-center space-x-3">
-            <button
-              onClick={handleAddTodo}
-              className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-            >
-              <svg
-                className="h-5 w-5 mr-1"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-              </svg>
-              新增
-            </button>
-
-            <button
-              onClick={handleLogout}
-              className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
-            >
-              登出
-            </button>
-          </div>
+            新增
+          </button>
         </div>
 
         {/* 数据库错误提示 */}
@@ -285,14 +268,14 @@ export default function TodoPage() {
           <div
             className={`mb-6 p-4 rounded-md ${
               isDatabaseError
-                ? 'bg-orange-50 border border-orange-200'
-                : 'bg-red-50 border border-red-200'
+                ? 'bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800'
+                : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'
             }`}
           >
             <div className="flex items-start">
               <div className="flex-shrink-0">
                 {isDatabaseError ? (
-                  <svg className="w-6 h-6 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       fillRule="evenodd"
                       d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
@@ -300,7 +283,7 @@ export default function TodoPage() {
                     />
                   </svg>
                 ) : (
-                  <svg className="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       fillRule="evenodd"
                       d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
@@ -312,13 +295,13 @@ export default function TodoPage() {
               <div className="ml-3 flex-1">
                 <h3
                   className={`text-sm font-medium ${
-                    isDatabaseError ? 'text-orange-800' : 'text-red-800'
+                    isDatabaseError ? 'text-orange-800 dark:text-orange-200' : 'text-red-800 dark:text-red-200'
                   }`}
                 >
                   {isDatabaseError ? '数据库连接异常' : '系统错误'}
                 </h3>
                 <div
-                  className={`mt-1 text-sm ${isDatabaseError ? 'text-orange-700' : 'text-red-700'}`}
+                  className={`mt-1 text-sm ${isDatabaseError ? 'text-orange-700 dark:text-orange-300' : 'text-red-700 dark:text-red-300'}`}
                 >
                   <p>{error}</p>
                 </div>
@@ -328,7 +311,7 @@ export default function TodoPage() {
                       type="button"
                       onClick={handleRetryConnection}
                       disabled={isLoading}
-                      className="text-sm bg-orange-100 hover:bg-orange-200 text-orange-800 font-medium py-1.5 px-3 rounded-md transition-colors disabled:opacity-50"
+                      className="text-sm bg-orange-100 dark:bg-orange-900/30 hover:bg-orange-200 dark:hover:bg-orange-900/50 text-orange-800 dark:text-orange-200 font-medium py-1.5 px-3 rounded-md transition-colors disabled:opacity-50"
                     >
                       {isLoading ? '检查中...' : '重试连接'}
                     </button>
@@ -339,7 +322,7 @@ export default function TodoPage() {
                       setError('')
                       setIsDatabaseError(false)
                     }}
-                    className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-1.5 px-3 rounded-md transition-colors"
+                    className="text-sm bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-medium py-1.5 px-3 rounded-md transition-colors"
                   >
                     知道了
                   </button>
@@ -358,8 +341,8 @@ export default function TodoPage() {
                 onClick={() => setFilter(status)}
                 className={`px-3 py-1 rounded-full text-sm transition-colors ${
                   filter === status
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-blue-600 dark:bg-blue-700 text-white'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 {status === 'all' ? '全部' : statusLabels[status]}
@@ -371,7 +354,7 @@ export default function TodoPage() {
         {isLoading ? (
           <div className="py-10 text-center">
             <svg
-              className="animate-spin h-10 w-10 mx-auto text-blue-500"
+              className="animate-spin h-10 w-10 mx-auto text-blue-500 dark:text-blue-400"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -390,22 +373,22 @@ export default function TodoPage() {
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
             </svg>
-            <p className="mt-3 text-gray-500">加载中...</p>
+            <p className="mt-3 text-gray-500 dark:text-gray-400">加载中...</p>
           </div>
         ) : (
           <div className="space-y-3">
             {filteredTodos.length === 0 ? (
-              <p className="text-gray-500 text-center py-8">暂无待办事项，点击新增按钮添加</p>
+              <p className="text-gray-500 dark:text-gray-400 text-center py-8">暂无待办事项，点击新增按钮添加</p>
             ) : (
               filteredTodos.map((todo) => (
                 <div
                   key={todo.id}
-                  className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                  className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md dark:hover:shadow-gray-900/20 transition-shadow bg-white dark:bg-gray-800"
                 >
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
-                        <h3 className="font-medium text-gray-900">{todo.title}</h3>
+                        <h3 className="font-medium text-gray-900 dark:text-gray-100">{todo.title}</h3>
                         <span
                           className={`px-2 py-1 rounded-full text-xs ${getStatusColor(
                             todo.status
@@ -419,7 +402,7 @@ export default function TodoPage() {
                       </div>
 
                       {todo.description && (
-                        <p className="text-gray-600 text-sm mb-2">{todo.description}</p>
+                        <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">{todo.description}</p>
                       )}
 
                       {todo.tags && todo.tags.length > 0 && (
@@ -427,7 +410,7 @@ export default function TodoPage() {
                           {todo.tags.map((tag, index) => (
                             <span
                               key={index}
-                              className="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded"
+                              className="px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs rounded"
                             >
                               {tag}
                             </span>
@@ -435,7 +418,7 @@ export default function TodoPage() {
                         </div>
                       )}
 
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-gray-500 dark:text-gray-400">
                         创建时间: {new Date(todo.created_at).toLocaleString()}
                         {todo.due_date && (
                           <span className="ml-4">
@@ -450,7 +433,7 @@ export default function TodoPage() {
                       {todo.status === 'pending' && (
                         <button
                           onClick={() => handleStatusChange(todo.id, 'in_progress')}
-                          className="text-blue-600 hover:text-blue-800 text-sm"
+                          className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm"
                           title="开始执行"
                         >
                           开始
@@ -459,7 +442,7 @@ export default function TodoPage() {
                       {todo.status === 'in_progress' && (
                         <button
                           onClick={() => handleStatusChange(todo.id, 'completed')}
-                          className="text-green-600 hover:text-green-800 text-sm"
+                          className="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 text-sm"
                           title="标记完成"
                         >
                           完成
@@ -468,7 +451,7 @@ export default function TodoPage() {
 
                       <button
                         onClick={() => handleEditTodo(todo.id)}
-                        className="text-blue-600 hover:text-blue-800"
+                        className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
                         title="编辑"
                       >
                         <svg
@@ -483,7 +466,7 @@ export default function TodoPage() {
 
                       <button
                         onClick={() => handleDeleteTodo(todo.id)}
-                        className="text-red-600 hover:text-red-800"
+                        className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300"
                         title="删除"
                       >
                         <svg

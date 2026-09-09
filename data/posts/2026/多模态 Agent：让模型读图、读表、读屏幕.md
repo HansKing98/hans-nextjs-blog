@@ -7,6 +7,7 @@ tags:
   - 多模态
   - Agent
   - Computer Use
+  - top
 summary: 多模态 Agent 不只是把图片作为 Prompt 附件，还要处理图像、表格和屏幕状态，完成工具调用，并验证视觉理解是否真的支持了下一步动作。
 categories:
   - 人工智能

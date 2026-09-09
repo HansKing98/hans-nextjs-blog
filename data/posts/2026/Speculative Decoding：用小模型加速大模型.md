@@ -1,6 +1,6 @@
 ---
 title: Speculative Decoding：用小模型加速大模型
-date: 2025-10-25 10:00:00
+date: 2025-10-26 10:00:00
 tags:
   - AI
   - LLM

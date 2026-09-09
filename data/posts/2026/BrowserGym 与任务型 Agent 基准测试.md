@@ -1,6 +1,6 @@
 ---
 title: BrowserGym 与任务型 Agent 基准测试
-date: 2025-05-02 10:00:00
+date: 2025-08-31 10:00:00
 tags:
   - AI
   - LLM

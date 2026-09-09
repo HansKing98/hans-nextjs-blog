@@ -53,6 +53,7 @@ AI 系统的 SLO：质量、延迟、可用性与安全.md: AI 服务等级目�
 法则: 成员完整·一行一文件·父级链接·技术词前置
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 LoRA 原理：低秩矩阵为什么能微调大模型.md: LoRA 低秩更新、参数量、注入层、超参数与部署边界
+Llama 3 开源模型部署与 API 封装.md: Llama 3 权重、Tokenizer、推理服务、API 与并发部署
 Mixtral 与 MoE：稀疏专家模型怎么省计算.md: Mixtral 稀疏 MoE、专家路由、激活参数与部署成本
 MoE 的路由、负载均衡与训练难点.md: MoE Top-k 路由、容量因子、负载均衡与通信优化
 QLoRA 实战：在消费级显卡上微调模型.md: QLoRA、4-bit 量化、LoRA、显存规划与微调评测

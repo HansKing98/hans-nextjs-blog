@@ -5,6 +5,7 @@
 大模型发展史与100篇技术学习写作计划.md: 2023—2026 大模型技术路线图，包含 100 个教程选题与建议发布时间
 多智能体协作：什么时候值得拆成多个 Agent.md: 多智能体拆分判断、协作模式与失败恢复设计
 Tool Calling 的可靠性：Schema、重试与幂等.md: 工具调用的 Schema、错误分类、重试与幂等设计
+ReAct Agent：从搜索工具开始实现智能体.md: ReAct 计划、行动、观察循环与最小 Agent 实现
 MCP 协议入门：统一模型与外部工具的连接.md: MCP Host、Client、Server 架构与工具调用协议入门
 MCP Server 实战：为博客暴露搜索工具.md: 以博客搜索为例实现可被 Agent 调用的 MCP Server
 Computer Use：浏览器操作的状态机设计.md: 浏览器操作型 Agent 的状态机、观察与动作闭环

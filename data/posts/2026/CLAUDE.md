@@ -52,6 +52,7 @@ AI 系统的 SLO：质量、延迟、可用性与安全.md: AI 服务等级目�
 
 法则: 成员完整·一行一文件·父级链接·技术词前置
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
+GraphRAG：知识图谱如何补足向量检索.md: GraphRAG 的实体关系、多跳查询、混合检索与权限维护
 RAG 数据管道：解析 PDF、网页与表格.md: PDF、网页、表格解析、切分、权限元数据与增量索引
 LLM 安全：Prompt Injection 与越权工具调用.md: Prompt Injection、间接注入、最小权限与工具安全防御
 Guardrails：输出过滤、策略判断与人工兜底.md: AI 安全护栏、策略引擎、人工审核与误判评测

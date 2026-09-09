@@ -52,6 +52,7 @@ AI 系统的 SLO：质量、延迟、可用性与安全.md: AI 服务等级目�
 
 法则: 成员完整·一行一文件·父级链接·技术词前置
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
+SFT 指令微调：数据格式、清洗与训练.md: SFT 数据构造、清洗、loss mask、训练与回归评测
 偏好优化：从 RLHF 到 DPO.md: RLHF、奖励模型、PPO 与 DPO 的偏好优化演进
 DPO 实战：训练一个更符合业务偏好的模型.md: DPO 偏好数据、损失直觉、LoRA 训练与模型评测
 RAG 进阶：Hybrid Search 与 Reranker.md: 关键词、向量混合召回、RRF 融合与 Reranker 精排

@@ -166,7 +166,7 @@ const icon = fromHtmlIsomorphic(
 
 export default makeSource({
   contentDirPath: 'data',
-  contentDirExclude: ['tofu.json'],
+  contentDirExclude: ['tofu.json', '**/CLAUDE.md'],
   documentTypes: [Post],
   mdx: {
     // cwd: process.cwd(),

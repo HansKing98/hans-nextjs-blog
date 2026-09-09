@@ -18,7 +18,7 @@ categories:
  * [OUTPUT]: 对外提供长文档问答的三种编排模式、上下文预算、摘要质量、并行处理与评测方法
  * [POS]: 大模型工程系列的长上下文架构文章，承接 Context Window 与长文本主题，服务后续 Claude 3 与 RAG 进阶文章
  * [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
- */
+ */}
 
 # 长文档问答：Map-Reduce、Refine 与分层摘要
 

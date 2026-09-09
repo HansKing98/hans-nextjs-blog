@@ -3,6 +3,21 @@
 
 成员清单
 大模型发展史与100篇技术学习写作计划.md: 2023—2026 大模型技术路线图，包含 100 个教程选题与建议发布时间
+MCP 协议入门：统一模型与外部工具的连接.md: MCP Host、Client、Server 架构与工具调用协议入门
+MCP Server 实战：为博客暴露搜索工具.md: 以博客搜索为例实现可被 Agent 调用的 MCP Server
+Computer Use：浏览器操作的状态机设计.md: 浏览器操作型 Agent 的状态机、观察与动作闭环
+Agent Memory：短期记忆、长期记忆与用户画像.md: Agent 记忆分层、提取、召回与用户画像设计
+Agent 失败模式：循环、幻觉、工具误用与失控.md: Agent 常见失败模式、检测信号与恢复策略
+Human-in-the-loop：高风险动作前的审批设计.md: 高风险 Agent 动作的用户确认、审批与审计
+Agent 评测：任务成功率、轨迹质量与成本.md: Agent 任务结果、执行轨迹与资源成本评测
+BrowserGym 与任务型 Agent 基准测试.md: 浏览器任务型 Agent 的基准测试与实验设计
+vLLM 推理服务：PagedAttention 与吞吐优化.md: vLLM 推理服务、PagedAttention 与吞吐优化
+KV Cache：LLM 推理为什么会被显存卡住.md: KV Cache 的内存占用、复用与推理性能
+Continuous Batching 与服务并发.md: 连续批处理、请求调度与推理服务并发
+Speculative Decoding：用小模型加速大模型.md: 投机解码的验证流程、加速条件与工程权衡
+FlashAttention：注意力计算的 IO 优化.md: FlashAttention 的分块计算与显存访问优化
+量化实践：GPTQ、AWQ、GGUF 如何选择.md: GPTQ、AWQ、GGUF 量化格式与部署选择
+2025 年总结：从 Copilot 到可执行 Agent.md: 2025 年推理模型、Agent 与推理基础设施总结
 从模型选型到能力路由：建立自己的 Model Gateway.md: 统一模型调用、路由策略与降级机制
 LLM 网关设计：统一鉴权、限流、重试与审计.md: 面向生产环境的 LLM 网关实现
 结构化生成的终极实践：JSON Schema 与类型安全.md: 结构化输出与运行时校验
@@ -26,8 +41,8 @@ AI 系统的 SLO：质量、延迟、可用性与安全.md: AI 服务等级目�
 从零搭建 LLM 应用 CI：测试、评测与发布门禁.md: LLM 应用持续集成
 读论文方法：如何拆解一篇大模型论文.md: 大模型论文阅读方法
 复现论文的工程方法：环境、数据、指标与误差.md: 论文复现工程流程
-100 篇之后怎么继续：建立个人 AI 技术雷达.md: 个人技术跟踪系统
 大模型发展史总复盘：从生成文本到可执行系统.md: 2023—2026 技术演进总结
+100篇之后怎么继续：建立个人 AI 技术雷达.md: 个人 AI 技术跟踪、筛选与持续学习系统
 
 法则: 成员完整·一行一文件·父级链接·技术词前置
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md

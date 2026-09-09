@@ -52,6 +52,7 @@ AI 系统的 SLO：质量、延迟、可用性与安全.md: AI 服务等级目�
 
 法则: 成员完整·一行一文件·父级链接·技术词前置
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
+LLM 安全：Prompt Injection 与越权工具调用.md: Prompt Injection、间接注入、最小权限与工具安全防御
 Guardrails：输出过滤、策略判断与人工兜底.md: AI 安全护栏、策略引擎、人工审核与误判评测
 LLM 观测：Tracing、Token 用量与失败样本.md: LLM Trace、Token 计量、失败样本与质量闭环
 多模型路由：按质量、延迟和价格选择模型.md: 多模型统一接口、能力路由、降级熔断与成本评测

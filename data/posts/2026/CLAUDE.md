@@ -52,6 +52,7 @@ AI 系统的 SLO：质量、延迟、可用性与安全.md: AI 服务等级目�
 
 法则: 成员完整·一行一文件·父级链接·技术词前置
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
+Chain-of-Thought、ReAct 与 Tree-of-Thought 对比.md: CoT、ReAct、ToT 的推理路径、工具与搜索对比
 Test-time Compute：用更多推理换更高正确率.md: 推理时计算、候选采样、验证与动态预算
 DeepSeek-R1 的训练思路与开源影响.md: DeepSeek-R1、可验证奖励、GRPO 与推理模型开源影响
 GRPO 入门：群体相对策略优化.md: GRPO 的组内优势、奖励设计与推理训练流程

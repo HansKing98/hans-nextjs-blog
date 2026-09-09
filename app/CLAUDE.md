@@ -19,7 +19,7 @@ layout.tsx: App Router 根布局、全局 Provider 与站点框架
 library/page.tsx: 资料库页面
 music/page.tsx: 音乐页面
 not-found.tsx: 404 页面
-page.tsx: 网站首页入口
+page.tsx: 网站首页入口，组织问候区与精选文章列表
 plog/page.tsx: Plog 列表页面
 prompt/page.tsx: Prompt 页面
 prompt/list.tsx: Prompt 列表组件
@@ -33,7 +33,6 @@ seo.tsx: 页面 SEO 元数据生成工具
 showcase/page.tsx: 项目展示页面
 tags/[tag]/page.tsx: 标签文章列表页面
 theme-providers.tsx: 主题 Provider 组合
-xiaohongshu.tsx: 首页公司介绍与图片卡片展示组件
 posts/[...slug]/page.tsx: 文章兼容路径详情页面
 tag-data.json: 文章标签统计构建产物
 tag-plog-data.json: Plog 标签统计构建产物

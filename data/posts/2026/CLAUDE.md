@@ -53,6 +53,7 @@ AI 系统的 SLO：质量、延迟、可用性与安全.md: AI 服务等级目�
 法则: 成员完整·一行一文件·父级链接·技术词前置
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 LoRA 原理：低秩矩阵为什么能微调大模型.md: LoRA 低秩更新、参数量、注入层、超参数与部署边界
+长文档问答：Map-Reduce、Refine 与分层摘要.md: 长文档 Map-Reduce、Refine、分层摘要与引用评测
 Claude 3 系列与模型能力评测方法.md: Claude 3、多模态、长上下文与模型选型评测
 Llama 3 开源模型部署与 API 封装.md: Llama 3 权重、Tokenizer、推理服务、API 与并发部署
 Mixtral 与 MoE：稀疏专家模型怎么省计算.md: Mixtral 稀疏 MoE、专家路由、激活参数与部署成本

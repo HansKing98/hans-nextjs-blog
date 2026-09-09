@@ -2,7 +2,11 @@
   "name": "hans-nextjs-blog",
   "version": "2.0.0",
   "private": true,
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
+    "prebuild": "contentlayer build --clearCache && node ./scripts/generate-content-data.mjs",
     "start": "next dev",
     "dev": "cross-env INIT_CWD=$PWD next dev",
     "build": "cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",

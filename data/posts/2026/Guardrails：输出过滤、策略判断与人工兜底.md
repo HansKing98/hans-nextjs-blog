@@ -18,7 +18,7 @@ categories:
  * [OUTPUT]: 对外提供 AI Guardrails 的分层架构、规则设计、风险分级、人工兜底与评测方法
  * [POS]: 大模型工程系列的安全工程文章，承接 Prompt Injection 与越权工具调用，服务后续 LLM 观测与模型路由主题
  * [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
- */
+ */}
 
 # Guardrails：输出过滤、策略判断与人工兜底
 

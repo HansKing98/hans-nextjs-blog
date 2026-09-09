@@ -18,7 +18,7 @@ categories:
  * [OUTPUT]: 对外提供 Mixtral 与稀疏 MoE 的结构直觉、计算分析、路由流程、质量权衡与部署判断
  * [POS]: 大模型工程系列的 MoE 发展史文章，承接 Llama 3 与开源模型部署，服务后续 MoE 路由深入主题
  * [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
- */
+ */}
 
 # Mixtral 与 MoE：稀疏专家模型怎么省计算
 

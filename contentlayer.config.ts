@@ -1,5 +1,12 @@
+/**
+ * +--------------------------------------------------------------------------+
+ * | [INPUT]: 依赖 Contentlayer、MDX 插件、站点元数据与文章内容目录
+ * | [OUTPUT]: 对外提供 Post 文档类型与 Contentlayer 内容源配置
+ * | [POS]: 内容层核心配置，负责 Markdown/MDX 解析、派生字段与构建后索引
+ * | [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
+ * +--------------------------------------------------------------------------+
+ */
 import { ComputedFields, defineDocumentType, makeSource } from 'contentlayer/source-files'
-import { writeFileSync } from 'fs'
 import path from 'path'
 // Remark packages
 import remarkGfm from 'remark-gfm'
@@ -19,7 +26,6 @@ import rehypeCitation from 'rehype-citation'
 import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
 import octicons from '@primer/octicons'
 import { pinyin } from 'pinyin-pro'
@@ -58,62 +64,6 @@ const computedFields: ComputedFields = {
     resolve: (doc) => doc.summary,
   },
   wordCount: { type: 'number', resolve: (doc) => count(doc.body.raw) },
-}
-
-/**
- * Count the occurrences of all tags across posts posts and write to json file
- */
-function createTagCount(allPosts) {
-  const tagCount: Record<string, number> = {}
-  allPosts.forEach((file) => {
-    if (file.tags && file.draft !== true) {
-      if (file.tags.includes('plog')) {
-        return
-      }
-      file.tags.forEach((tag) => {
-        const formattedTag = tag
-        if (formattedTag in tagCount) {
-          tagCount[formattedTag] += 1
-        } else {
-          tagCount[formattedTag] = 1
-        }
-      })
-    }
-  })
-  writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
-}
-
-function createPlogTagCount(allPosts) {
-  const tagCount: Record<string, number> = {}
-  allPosts.forEach((file) => {
-    if (file.tags && file.draft !== true) {
-      if (!file.tags.includes('plog')) {
-        return
-      }
-      file.tags.forEach((tag) => {
-        const formattedTag = tag
-        if (formattedTag in tagCount) {
-          tagCount[formattedTag] += 1
-        } else {
-          tagCount[formattedTag] = 1
-        }
-      })
-    }
-  })
-  writeFileSync('./app/tag-plog-data.json', JSON.stringify(tagCount))
-}
-
-function createSearchIndex(allPosts) {
-  if (
-    siteMetadata?.search?.provider === 'kbar' &&
-    siteMetadata.search.kbarConfig.searchDocumentsPath
-  ) {
-    writeFileSync(
-      `public/${siteMetadata.search.kbarConfig.searchDocumentsPath}`,
-      JSON.stringify(allCoreContent(sortPosts(allPosts)))
-    )
-    console.log('Local search index generated...')
-  }
 }
 
 export const Post = defineDocumentType(() => ({
@@ -166,7 +116,7 @@ const icon = fromHtmlIsomorphic(
 
 export default makeSource({
   contentDirPath: 'data',
-  contentDirExclude: ['tofu.json', '**/CLAUDE.md'],
+  contentDirExclude: ['tofu.json', 'showcase.json', '**/CLAUDE.md'],
   documentTypes: [Post],
   mdx: {
     // cwd: process.cwd(),
@@ -195,11 +145,5 @@ export default makeSource({
       [rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }],
       rehypePresetMinify,
     ],
-  },
-  onSuccess: async (importData) => {
-    const { allPosts } = await importData()
-    createTagCount(allPosts)
-    createPlogTagCount(allPosts)
-    createSearchIndex(allPosts)
   },
 })

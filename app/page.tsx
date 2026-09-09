@@ -1,23 +1,17 @@
-import Greetings from '@/components/Greetings'
-import ExcellentPage from '@/app/excellent/excellent-page'
-import { allPosts } from 'contentlayer/generated'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
-import tagData from 'app/tag-data.json'
+/**
+ * +--------------------------------------------------------------------------+
+ * | [INPUT]: 依赖 Xiaohongshu 首页展示组件
+ * | [OUTPUT]: 对外提供网站首页 Home 页面
+ * | [POS]: App Router 根路由，负责承载首页主内容
+ * | [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
+ * +--------------------------------------------------------------------------+
+ */
+import Xiaohongshu from './xiaohongshu'
 
 export default function Home() {
-  const sortedPosts = sortPosts(allPosts)
-  const posts = allCoreContent(sortedPosts)
-  const tags = tagData as Record<string, number>
-  delete tags.plog
   return (
     <>
-      <Greetings />
-      <ExcellentPage
-        posts={posts.filter(
-          (el) => el.tags?.includes('top') && (!el.tags || !el.tags.includes('plog'))
-        )}
-        tags={tags}
-      />
+      <Xiaohongshu />
     </>
   )
 }

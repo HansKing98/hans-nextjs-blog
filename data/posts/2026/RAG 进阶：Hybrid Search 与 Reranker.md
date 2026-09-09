@@ -18,7 +18,7 @@ categories:
  * [OUTPUT]: 对外提供 Hybrid Search 与 Reranker 的检索流程、分数融合、工程实现和参数评测方法
  * [POS]: 大模型工程系列的 RAG 进阶文章，承接 RAG 基础与检索入门，服务后续 GraphRAG 和数据管道主题
  * [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
- */
+ */}
 
 # RAG 进阶：Hybrid Search 与 Reranker
 

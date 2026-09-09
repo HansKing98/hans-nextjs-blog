@@ -18,7 +18,7 @@ categories:
  * [OUTPUT]: 对外提供开源模型本地部署、推理服务、统一 API 封装、并发控制与安全运维方法
  * [POS]: 大模型工程系列的开源部署文章，承接 Hugging Face 与本地模型主题，服务后续 MoE 与微调主题
  * [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
- */
+ */}
 
 # Llama 3 开源模型部署与 API 封装
 

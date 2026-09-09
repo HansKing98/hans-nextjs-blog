@@ -1,8 +1,16 @@
-import { mkdirSync, writeFileSync } from 'fs'
+/**
+ * +--------------------------------------------------------------------------+
+ * | [INPUT]: 依赖标签统计、Contentlayer 文章 JSON 与站点元数据
+ * | [OUTPUT]: 对外生成博客 RSS 与标签 RSS 文件
+ * | [POS]: 构建后发布文件生成器，由 postbuild.mjs 调用
+ * | [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
+ * +--------------------------------------------------------------------------+
+ */
+import { mkdirSync, readFileSync, writeFileSync } from 'fs'
 import path from 'path'
 import { escape } from 'pliny/utils/htmlEscaper.js'
-import tagData from '../app/tag-data.json' assert { type: 'json' }
-import { allPosts } from '../.contentlayer/generated/index.mjs'
+const tagData = JSON.parse(readFileSync('./app/tag-data.json', 'utf8'))
+const allPosts = JSON.parse(readFileSync('./.contentlayer/generated/Post/_index.json', 'utf8'))
 import siteMetadata from '../data/siteMetadata.js'
 
 const generateRssItem = (config, post) => `

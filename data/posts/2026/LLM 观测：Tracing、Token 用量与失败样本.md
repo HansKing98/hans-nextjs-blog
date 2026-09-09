@@ -18,7 +18,7 @@ categories:
  * [OUTPUT]: 对外提供 LLM 应用的 Trace 设计、指标体系、失败样本管理、告警与成本观测方法
  * [POS]: 大模型工程系列的 LLM 工程实践文章，承接 RAG、工具调用与模型路由主题，服务后续年度工程化总结
  * [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
- */
+ */}
 
 # LLM 观测：Tracing、Token 用量与失败样本
 

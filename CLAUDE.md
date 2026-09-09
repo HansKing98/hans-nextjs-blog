@@ -11,6 +11,6 @@ scripts/ - 构建后处理与 RSS 脚本
 <config>
 contentlayer.config.ts - 内容模型、MDX 插件与搜索索引
 data/siteMetadata.js - 站点元信息
-package.json - 依赖与构建脚本
+package.json - 依赖、构建脚本与 Node.js 20.x 运行时约束
 </config>
 法则: 极简·稳定·导航·版本精确

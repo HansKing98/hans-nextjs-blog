@@ -1,6 +1,6 @@
 import { allPosts } from 'contentlayer/generated'
 import { allCoreContent } from 'pliny/utils/contentlayer'
-import tagData from 'app/tag-data.json'
+import tagData from '../../tag-data.json'
 import PostCard from '@/components/PostCard'
 import Divider from '@/components/Divider'
 import { genPageMetadata } from '../../seo'

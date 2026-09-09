@@ -1,6 +1,6 @@
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allPosts } from 'contentlayer/generated'
-import tagData from 'app/tag-data.json'
+import tagData from '../tag-data.json'
 
 import BlogPage from './blog-page'
 import { genPageMetadata } from '../seo'

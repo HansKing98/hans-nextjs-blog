@@ -2,7 +2,7 @@
 > L2 | 父级: /CLAUDE.md
 
 成员清单
-generate-content-data.mjs: 构建前生成标签统计、Plog 标签统计与本地搜索索引
+generate-content-data.mjs: 由 build 显式调用，生成标签统计、Plog 标签统计与本地搜索索引
 postbuild.mjs: 构建后调用 RSS 生成流程
 rss.mjs: 根据文章数据生成 RSS 与标签 RSS 文件
 

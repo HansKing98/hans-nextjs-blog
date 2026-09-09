@@ -1,11 +1,19 @@
+/**
+ * +--------------------------------------------------------------------------+
+ * | [INPUT]: 依赖 Contentlayer 文章集合、标签统计工具、文章卡片与站点元数据
+ * | [OUTPUT]: 对外提供标签文章列表、静态标签参数与页面元数据
+ * | [POS]: App Router 动态标签路由，展示普通博客文章的标签筛选结果
+ * | [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
+ * +--------------------------------------------------------------------------+
+ */
 import { allPosts } from 'contentlayer/generated'
 import { allCoreContent } from 'pliny/utils/contentlayer'
-import tagData from '../../tag-data.json'
 import PostCard from '@/components/PostCard'
 import Divider from '@/components/Divider'
 import { genPageMetadata } from '../../seo'
 import siteMetadata from '@/data/siteMetadata'
 import { Metadata } from 'next'
+import { getTagCounts } from '@/lib/tag-data'
 
 export async function generateMetadata({ params }: { params: { tag: string } }): Promise<Metadata> {
   const tag = decodeURIComponent(params.tag)
@@ -21,7 +29,7 @@ export async function generateMetadata({ params }: { params: { tag: string } }):
   })
 }
 export const generateStaticParams = async () => {
-  const tagCounts = tagData as Record<string, number>
+  const tagCounts = getTagCounts(false)
   const tagKeys = Object.keys(tagCounts)
   const paths = tagKeys.map((tag) => ({
     tag: tag,

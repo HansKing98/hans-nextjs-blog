@@ -52,6 +52,7 @@ AI 系统的 SLO：质量、延迟、可用性与安全.md: AI 服务等级目�
 
 法则: 成员完整·一行一文件·父级链接·技术词前置
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
+DPO 实战：训练一个更符合业务偏好的模型.md: DPO 偏好数据、损失直觉、LoRA 训练与模型评测
 RAG 进阶：Hybrid Search 与 Reranker.md: 关键词、向量混合召回、RRF 融合与 Reranker 精排
 GraphRAG：知识图谱如何补足向量检索.md: GraphRAG 的实体关系、多跳查询、混合检索与权限维护
 RAG 数据管道：解析 PDF、网页与表格.md: PDF、网页、表格解析、切分、权限元数据与增量索引
